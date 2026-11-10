@@ -1,7 +1,7 @@
 import os
 import socket
 
-from crewai import LLM, Agent
+from crewai import LLM, Agent, Task
 from crewai.tools import tool
 from dotenv import load_dotenv
 
@@ -50,4 +50,11 @@ security_analyst = Agent(
     tools=[run_port_scanner],  # Agent use tis tool
     allow_delegation=False,
     llm=llm,
+)
+
+# Create a task for agent
+scan_task = Task(
+    description="Check which ports are open on the website scanme.nmap.org. Then, write a brief report in detailing your findings and the potential implications of these ports being open.",
+    expected_output="A list of the scanned ports and a brief security report regarding them.",
+    agent=security_analyst,
 )
