@@ -1,6 +1,6 @@
 import os
 
-from crewai import Agent, Task
+from crewai import Agent, Crew, Process, Task
 from dotenv import load_dotenv
 from langchain_google_genai import ChatGoogleGenerativeAI
 
@@ -46,3 +46,17 @@ write_task = Task(
     expected_output="A simple blog post with an engaging title and 3 paragraphs.",
     agent=writer,
 )
+
+# Setup crew and starting their duties
+tech_crew = Crew(
+    agents=[researcher, writer],
+    tasks=[researcher_task, write_task],
+    process=Process.sequential,  # Complete tasks properly step by step
+)
+
+result = tech_crew.kickoff()
+
+print("\n" + "=" * 50)
+print("✅ Final Result (Written by Technical Writer): ")
+print("=" * 50 + "\n")
+print(result)
