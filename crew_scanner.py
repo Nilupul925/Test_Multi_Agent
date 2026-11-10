@@ -1,7 +1,7 @@
 import os
 import socket
 
-from crewai import LLM
+from crewai import LLM, Agent
 from crewai.tools import tool
 from dotenv import load_dotenv
 
@@ -39,3 +39,15 @@ def run_port_scanner(target_ip_or_domain: str) -> str:
         return f"Success! Open ports on {target_ip_or_domain}: {','.join(open_ports)}"
     else:
         return f"None of the ports checked on {target_ip_or_domain} are open."
+
+
+# Create an Agent and tool is handover to it
+security_analyst = Agent(
+    role="Senior Security Analyst",
+    goal="Examining servers to identify open ports and ensure security.",
+    backstory="You are a skilled Cybersecurity expert who tests the security of servers and provides information.",
+    verbose=True,
+    tools=[run_port_scanner],  # Agent use tis tool
+    allow_delegation=False,
+    llm=llm,
+)
