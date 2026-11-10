@@ -1,6 +1,6 @@
 import os
 
-from crewai import Agent
+from crewai import Agent, Task
 from dotenv import load_dotenv
 from langchain_google_genai import ChatGoogleGenerativeAI
 
@@ -17,8 +17,8 @@ print("🚀 Agents are starting there works...")
 # First agent: Researcher
 researcher = Agent(
     role="Senior Cloud Researcher",
-    goal="Finding clear technical information regarding Cybersecurity and Networking technology.",
-    backstory="You are a researcher with many years of experience in Cybersecurity and Networking technology, who studies modern technologies in depth.",
+    goal="Finding clear technical information regarding Docker and Containerization technology.",
+    backstory="You are a researcher with many years of experience in cloud technology, who studies modern technologies in depth.",
     verbose=True,  # Show there works in terminal
     allow_delegation=False,
     llm=llm,
@@ -32,4 +32,11 @@ researcher = Agent(
     verbose=True,
     allow_delegation=False,
     llm=llm,
+)
+
+# Creating duties to be performed
+researcher_task = Task(
+    description="Outline 3 key points regarding what Docker is and why it is important for software engineers.",
+    expected_output="A short technical report containing 3 clear points about Docker",
+    agent=researcher,
 )
