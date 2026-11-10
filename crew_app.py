@@ -1,16 +1,14 @@
+# This is a multi-agent ai platform to practice :)
 import os
 
-from crewai import Agent, Crew, Process, Task
+from crewai import LLM, Agent, Crew, Process, Task
 from dotenv import load_dotenv
-from langchain_google_genai import ChatGoogleGenerativeAI
 
 # Getting API key
 load_dotenv()
 
 # Setup Gemni AI model for CewAI
-llm = ChatGoogleGenerativeAI(
-    model="gemini-3.5-flash-lite", google_api_key=os.getenv("GEMINI_API_KEY")
-)
+llm = LLM(model="gemini-3.5-flash-lite", api_key=os.getenv("GEMINI_API_KEY"))
 
 print("🚀 Agents are starting there works...")
 
