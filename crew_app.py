@@ -23,3 +23,13 @@ researcher = Agent(
     allow_delegation=False,
     llm=llm,
 )
+
+# Second Agent: Writer
+researcher = Agent(
+    role="Technical Writer",
+    goal="Transforming complex technical information provided by a researcher into simple article that is understandable to the general public.",
+    backstory="You are a talented writer capable of explaining complex technical matters in a very simple and engaging way.",
+    verbose=True,
+    allow_delegation=False,
+    llm=llm,
+)
