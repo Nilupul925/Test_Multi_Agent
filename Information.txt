@@ -1,10 +1,28 @@
+======================================================================
+Multi-Agent System (CrewAI + Google Gemini) - Setup & Usage Guide
+======================================================================
+
+Prerequisites:
+   - Python >= 3.10 and < 3.14 (Python 3.13 recommended for CrewAI)
+   - Google Gemini API Key
+
 1. Create and Activate Virtual Environment:
-   - Create:     python -m venv .venv
-   - Activate:   .venv\Scripts\activate
-   - Deactivate: deactivate
+   - Create (Standard):  python -m venv .venv
+   - Create (with uv):   uv venv --python 3.13 --seed .venv
+   - Activate (Windows): .venv\Scripts\activate
+   - Deactivate:         deactivate
 
 2. Install Dependencies:
-   - pip install -r requirements.txt
+   - With pip:           pip install -r requirements.txt
+   - With uv:            uv pip install -r requirements.txt
 
-3. Launch Modern Enterprise GUI Application (Recommended):
-   - python crew_app.py
+3. Configure Environment Variables:
+   - Create a `.env` file in the project root directory:
+     GEMINI_API_KEY=your_actual_gemini_api_key_here
+
+4. Run Multi-Agent Applications:
+   - Cloud Researcher & Technical Writer Crew:
+     python crew_app.py
+
+   - Security Analyst Port Scanner Crew (with Custom Tool):
+     python crew_scanner.py
