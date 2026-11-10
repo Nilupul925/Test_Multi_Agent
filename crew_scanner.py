@@ -1,7 +1,7 @@
 import os
 import socket
 
-from crewai import LLM, Agent, Task
+from crewai import LLM, Agent, Crew, Process, Task
 from crewai.tools import tool
 from dotenv import load_dotenv
 
@@ -58,3 +58,16 @@ scan_task = Task(
     expected_output="A list of the scanned ports and a brief security report regarding them.",
     agent=security_analyst,
 )
+
+# Setup crew and Kickoff
+sec_crew = Crew(
+    agents=[security_analyst], tasks=[scan_task], process=Process.sequential
+)
+
+print("🚀 Agents are starting there works...")
+result = sec_crew.kickoff()
+
+print("\n" + "=" * 50)
+print("✅ Final Security Report: ")
+print("=" * 50 + "\n")
+print(result)
